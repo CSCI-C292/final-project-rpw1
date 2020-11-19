@@ -1,0 +1,48 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_hit_anim_f0.png" type="Texture" id=2]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_run_anim_f1.png" type="Texture" id=3]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_idle_anim_f1.png" type="Texture" id=4]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_run_anim_f2.png" type="Texture" id=5]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_idle_anim_f3.png" type="Texture" id=6]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_idle_anim_f2.png" type="Texture" id=7]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_run_anim_f0.png" type="Texture" id=8]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_run_anim_f3.png" type="Texture" id=9]
+[ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_idle_anim_f0.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.70963, 9.37307 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 64.3085, 160.129 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "hit"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.176781, 5.36716 )
+shape = SubResource( 2 )

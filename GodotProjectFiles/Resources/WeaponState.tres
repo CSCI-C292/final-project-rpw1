@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/runtime_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+current_weapon_state = 0
