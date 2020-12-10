@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource( 1 )
 current_weapon_state = 0
+current_health = 2

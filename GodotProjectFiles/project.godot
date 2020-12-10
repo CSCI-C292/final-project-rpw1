@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://scripts/boss.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scripts/enemy.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/player.gd"
@@ -20,6 +30,8 @@ _global_script_classes=[ {
 "path": "res://scripts/runtime_data.gd"
 } ]
 _global_script_class_icons={
+"Boss": "",
+"Enemy": "",
 "Player": "",
 "RuntimeData": ""
 }
@@ -27,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="FinalProject"
-run/main_scene="res://Scenes/Level1.tscn"
+run/main_scene="res://Scenes/StartMenu.tscn"
 
 [autoload]
 

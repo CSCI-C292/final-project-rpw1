@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_hit_anim_f0.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_run_anim_f0.png" type="Texture" id=8]
 [ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_run_anim_f3.png" type="Texture" id=9]
 [ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/knight_m_idle_anim_f0.png" type="Texture" id=10]
+[ext_resource path="res://Resources/WeaponState.tres" type="Resource" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,14 +19,14 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "hit",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "hit",
 "speed": 5.0
 } ]
 
@@ -33,11 +34,12 @@ animations = [ {
 extents = Vector2( 5.70963, 9.37307 )
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 64.3085, 160.129 )
+position = Vector2( 64.8091, 160.796 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+_runtime_data = ExtResource( 11 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
