@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -14,6 +14,12 @@
 [ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/big_demon_idle_anim_f2.png" type="Texture" id=12]
 [ext_resource path="res://AssetFiles/0x72_DungeonTilesetII_v1.3.1/frames/big_demon_idle_anim_f1.png" type="Texture" id=13]
 [ext_resource path="res://scripts/boss.gd" type="Script" id=14]
+[ext_resource path="res://scripts/level.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/PauseMenu.tscn" type="PackedScene" id=16]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 11.0
+height = 10.0
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -33,12 +39,10 @@ radius = 9.60889
 height = 11.9497
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 187.443
-
-[sub_resource type="CapsuleShape2D" id=4]
-height = 10.0
+radius = 307.044
 
 [node name="Level5" type="Node2D"]
+script = ExtResource( 15 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
 
@@ -59,6 +63,12 @@ script = ExtResource( 14 )
 __meta__ = {
 "_edit_group_": true
 }
+_end_game_path = "res://Scenes/EndScreen.tscn"
+
+[node name="Area2DHitBox" type="Area2D" parent="Boss"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/Area2DHitBox"]
+shape = SubResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Boss"]
 frames = SubResource( 1 )
@@ -72,9 +82,13 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/Area2D"]
 shape = SubResource( 3 )
 
-[node name="Area2DHitBox" type="Area2D" parent="Boss"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/Area2DHitBox"]
-shape = SubResource( 4 )
+[node name="PauseMenu" parent="." instance=ExtResource( 16 )]
+visible = false
+margin_left = 127.399
+margin_top = 85.8683
+margin_right = 127.399
+margin_bottom = 85.8683
+rect_scale = Vector2( 0.25, 0.25 )
+[connection signal="body_entered" from="Boss/Area2DHitBox" to="Boss" method="_on_Area2DHitBox_body_entered"]
 [connection signal="body_entered" from="Boss/Area2D" to="Boss" method="_on_boss_body_entered"]
 [connection signal="body_exited" from="Boss/Area2D" to="Boss" method="_on_boss_body_exited"]

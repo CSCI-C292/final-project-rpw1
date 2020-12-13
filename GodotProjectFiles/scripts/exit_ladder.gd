@@ -6,8 +6,8 @@ export(String, FILE, "*.tscn") var _next_level_path_2
 func _ready():
 	pass
 
-
-func _on_exit_body_entered(body):
+# This function starts the next level
+func _on_exit_body_entered(body) -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	if (rng.randf() < 0.5):

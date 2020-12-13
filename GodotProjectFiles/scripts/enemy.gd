@@ -7,24 +7,14 @@ onready var _sprite = get_node("AnimatedSprite") as AnimatedSprite
 var _velocity: Vector2
 var _chasing := false
 var _player_position: Vector2
-export var speed := 70.0
+export var speed := 85.0
 var _player_veloctiy: Vector2
-
-var hurt_time := 0.0
-const MAX_HURT_TIME := 1.0
-var is_invincible := false
-
 
 func _ready():
 	GameEvents.connect("player_vector", self, "player_vector_update")
 
 
 func _physics_process(delta):
-	if self.is_invincible:
-		self.hurt_time += delta
-		if self.hurt_time >= self.MAX_HURT_TIME:
-			self.is_invincible = false
-			self.hurt_time = 0
 	if self._chasing:
 		self._sprite.play("run")
 		GameEvents.emit_get_player_vector()
@@ -38,29 +28,29 @@ func _physics_process(delta):
 	else:
 		self._sprite.play("idle")
 		
-
-func get_move_vel(delta):
+# This function gets the difference of the player and the boss
+# Then it moves the boss 5 delta's ahead of the player
+func get_move_vel(delta) -> void:
 	var difference_vector = self._player_position - self.position
 	difference_vector = difference_vector + (self._player_veloctiy * delta * 5)
 	self._velocity = difference_vector
 
-func _on_Area2D_body_entered(body):
+# This function starts the boss to chase the player
+func _on_Area2D_body_entered(body) -> void:
 	if body is Player:
 		self._chasing = true
 
-
-func _on_Area2D_body_exited(body):
+# This function ends the boss to chase the player
+func _on_Area2D_body_exited(body) -> void:
 	if body is Player:
 		self._chasing = false
 		
-func player_vector_update(player_vector: Vector2, player_velocity: Vector2):
+# This function gets the player's velocity and position
+func player_vector_update(player_vector: Vector2, player_velocity: Vector2) -> void:
 	self._player_position = player_vector
 	self._player_veloctiy = player_velocity
 
-
-func _on_Area2DHitBox_body_entered(body):
-	if not self.is_invincible and body is Player:
+# This function sends a singal to remove the health from the player
+func _on_Area2DHitBox_body_entered(body) -> void:
+	if body is Player:
 		GameEvents.emit_enemy_touched()
-		self.is_invincible = true
-	else:
-		self.is_invincible = false

@@ -10,7 +10,8 @@ func _ready():
 	GameEvents.connect("player_hit", self, "_remove_health")
 	GameEvents.connect("set_health", self, "_set_health")
 	
-func _remove_health():
+# This function removes one heart from the players health.
+func _remove_health() -> void:
 	if self._health_position > -1:
 		var current_heart = self._health_container.get_child(self._health_position) as TextureRect
 		if not current_heart.visible and self._health_position == 1:
@@ -21,6 +22,7 @@ func _remove_health():
 	if self._health_position == -1:
 		get_tree().change_scene(self._game_over_path)
 
+# This function sets the current players health to the health UI.
 func _set_health(health_pos : int) -> void:
 	self._health_position = health_pos
 	for i in range(health_pos, self._health):
